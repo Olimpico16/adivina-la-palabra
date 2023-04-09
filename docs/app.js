@@ -30,8 +30,8 @@ let arrayPalabraActual = [];
 //Cantidad de de letras acertadas por cada jugada
 let cantidadAcertadas = 0;
 
-//Arreglo que guarda cada letra en divs
-let divsPalabraActual = [];
+//Arreglo que guarda cada letra en inputs
+let inputsPalabraActual = [];
 
 //Cantidad de palabras que debe acertar en cada jugada.
 let totalQueDebeAcertar;
@@ -75,15 +75,17 @@ function cargarNuevaPalabra() {
   document.getElementById("palabra").innerHTML = "";
   document.getElementById("letrasIngresadas").innerHTML = "";
 
-  //Cargamos la cantidad de divs (letras) que tiene la palabra
+  //Cargamos la cantidad de inputs (letras) que tiene la palabra
   for (i = 0; i < palabra.length; i++) {
-    var divLetra = document.createElement("div");
-    divLetra.className = "letra";
-    document.getElementById("palabra").appendChild(divLetra);
+    let inputLetra = document.createElement("input");
+    inputLetra.onkeypress = keyPress;
+    inputLetra.className = "letra";
+    document.getElementById("palabra").appendChild(inputLetra);
+    
   }
 
-  //Selecciono todos los divs de la palabra
-  divsPalabraActual = document.getElementsByClassName("letra");
+  //Selecciono todos los inputs de la palabra
+  inputsPalabraActual = document.getElementsByClassName("letra");
 
   //setemos los intentos
   intentosRestantes = 5;
@@ -104,13 +106,7 @@ cargarNuevaPalabra();
 //Detecto la tecla que el usuario presion
 document.addEventListener("keydown", (event) => {
   //Controlo si la tecla presionada es una letra
-  if (!intentosRestantes) {
-    
-    
-    
-    return;
-  }
-
+  if (!intentosRestantes) return;
   if (isLetter(event.key)) {
     //Tomo las letras ya ingresadas hasta el momento
     let letrasIngresadas =
@@ -122,11 +118,12 @@ document.addEventListener("keydown", (event) => {
       //variable bandera para saber si la letra ingresada esta en la palabra a descrubir
       let acerto = false;
 
-      //Recorro el arreglo que ocntiene la palabra para verificar si la palabra ingresada esta
+      console.log(arrayPalabraActual);
+      //Recorro el arreglo que contiene la palabra para verificar si la palabra ingresada esta
       for (i = 0; i < arrayPalabraActual.length; i++) {
         if (arrayPalabraActual[i] == event.key.toUpperCase()) {
           //acertó
-          divsPalabraActual[i].innerHTML = event.key.toUpperCase();
+          inputsPalabraActual[i].value = event.key.toUpperCase();
           acerto = true;
           //Aumento en uno la cantidad de letras acertadas
           cantidadAcertadas = cantidadAcertadas + 1;
@@ -137,11 +134,11 @@ document.addEventListener("keydown", (event) => {
       if (acerto == true) {
         //controlamos si ya acerto todas
         if (totalQueDebeAcertar == cantidadAcertadas) {
-          //asigno a cada div de la palabra la clase pintar para ponerlo en verde cada div
+          //asigno a cada input de la palabra la clase pintar para ponerlo en verde cada input
+          alert("Haz Ganado, ¡Felicidades!");
           for (i = 0; i < arrayPalabraActual.length; i++) {
-            divsPalabraActual[i].className = "letra pintar";
-        }
-        alert('Haz Ganado, ¡Felicidades!');
+            inputsPalabraActual[i].className = "letra pintar";
+          }
         }
       } else {
         //No acerto, decremento los intentos restantes
@@ -150,11 +147,10 @@ document.addEventListener("keydown", (event) => {
 
         //controlamos si ya acabo todas la oportunidades
         if (intentosRestantes <= 0) {
-            alert('Haz perdido');
+          alert("Haz perdido");
           for (i = 0; i <= arrayPalabraActual.length; i++) {
-            divsPalabraActual[i].className = "letra pintarError";
+            inputsPalabraActual[i].className = "letra pintarError";
           }
-          
         }
       }
 
@@ -170,3 +166,6 @@ function isLetter(str) {
   return str.length === 1 && str.match(/[a-z]/i);
 }
 
+function keyPress() {
+  return false;
+}

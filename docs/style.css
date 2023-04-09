@@ -19,8 +19,11 @@ body{
     justify-content: center;
     align-items: center;
 }
+input{
+    background: transparent;
+}
 section{
-    width: 500px;
+    width: max-content;
     /* background-color: #1d2837; */
     border: 3px solid #fff;
     border-radius: 25px;
