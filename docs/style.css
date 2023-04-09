@@ -29,6 +29,7 @@ section{
     border-radius: 25px;
     color: #fff;
     padding: 20px;
+    overflow: hidden;
 }
 h2{
     border-bottom: 1px solid #fff;
@@ -39,6 +40,8 @@ h2{
     display: flex;
     justify-content: center;
     margin: 40px 0;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .letra{
     height: 50px;
@@ -92,6 +95,12 @@ button:hover{
         border: 3px solid #fff;
         color: #fff;
         padding: 20px;
+    }
+
+    .letra{
+        width: 35px;
+        height: 35px;
+        font-size: 25px;
     }
 }
 

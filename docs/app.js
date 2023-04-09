@@ -67,7 +67,7 @@ function cargarNuevaPalabra() {
   let palabra = arrayPalabras[posActual];
   totalQueDebeAcertar = palabra.length;
   cantidadAcertadas = 0;
-
+  
   //Guardamos la palabra que esta en formato string en un arreglo
   arrayPalabraActual = palabra.split("");
 
@@ -81,7 +81,6 @@ function cargarNuevaPalabra() {
     inputLetra.onkeypress = keyPress;
     inputLetra.className = "letra";
     document.getElementById("palabra").appendChild(inputLetra);
-    
   }
 
   //Selecciono todos los inputs de la palabra
