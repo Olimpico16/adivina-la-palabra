@@ -80,6 +80,7 @@ function cargarNuevaPalabra() {
     let inputLetra = document.createElement("input");
     inputLetra.onkeypress = keyPress;
     inputLetra.className = "letra";
+    inputLetra.setAttribute('readonly','true');
     document.getElementById("palabra").appendChild(inputLetra);
   }
 
